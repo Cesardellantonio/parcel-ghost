@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06080f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Parcel Ghost — courier who only exists while holding still. Deliver sealed parcels before the shift ends.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Parcel Ghost</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hud">
+      <div class="hud-top">
+        <div class="brand">
+          <p class="mark">Night atrium · shift run</p>
+          <h1>Parcel Ghost</h1>
+        </div>
+        <button id="btn-pause" class="icon-btn" type="button" aria-label="Pause" disabled>
+          <span class="glyph" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>Parcels</span><strong id="hud-parcels">0 / 3</strong></div>
+        <div class="stat"><span>Shift</span><strong id="hud-timer">1:30</strong></div>
+        <div class="stat"><span>State</span><strong id="hud-mode">Ghost</strong></div>
+      </div>
+    </header>
+
+    <div class="meters" id="meters">
+      <span id="pill-mode" class="pill ghost">Ghost</span>
+      <span id="pill-held" class="pill held" hidden>Holding —</span>
+      <span id="pill-hint" class="pill hint-pill">Stand still to exist</span>
+    </div>
+
+    <div class="stage" id="stage">
+      <canvas id="game" width="390" height="620" aria-label="Parcel Ghost atrium. Move to vanish; stand still to solidify and handle parcels."></canvas>
+
+      <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+        <div class="card">
+          <p class="eyebrow" id="overlay-kicker">Launch brief</p>
+          <h2 id="overlay-title">Parcel Ghost</h2>
+          <p id="overlay-text">You are a courier who only EXISTS while holding still. Move and you become a ghost — cameras and guards forget you, but you cannot touch parcels. Stand still ~0.12s to solidify, then pick up, drop, or deliver.</p>
+          <ul class="legend" id="legend">
+            <li><i class="swatch jade" aria-hidden="true"></i>Jade parcel → Jade dock</li>
+            <li><i class="swatch ion" aria-hidden="true"></i>Ion parcel → Ion dock</li>
+            <li><i class="swatch amber" aria-hidden="true"></i>Amber parcel → Amber dock</li>
+          </ul>
+          <p class="fine" id="overlay-fine">Win: dock all 3 before the 90s shift ends. Fail: photo (solid inside a guard cone) or any parcel left in the open when time runs out. A held parcel counts as secure.</p>
+          <div id="summary" class="summary" hidden></div>
+          <div class="overlay-actions">
+            <button id="start-btn" class="btn-primary" type="button">Begin shift</button>
+            <button id="resume-btn" class="btn-primary" type="button" hidden>Resume</button>
+            <button id="restart-btn" class="btn-ghost" type="button" hidden>New shift</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls" id="controls">
+      <div id="stick" class="stick" aria-label="Touch stick">
+        <div id="stick-knob" class="stick-knob"></div>
+      </div>
+      <p class="hint">WASD / arrows move. Stand still to solidify (auto pick / deliver / drop). Esc or P pauses. Canvas drag also steers.</p>
+    </div>
+    <noscript><p class="hint">Parcel Ghost needs JavaScript. It runs fully offline once enabled.</p></noscript>
+  </main>
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
