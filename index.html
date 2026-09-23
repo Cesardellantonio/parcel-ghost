@@ -43,13 +43,14 @@
         <div class="card">
           <p class="eyebrow" id="overlay-kicker">Launch brief</p>
           <h2 id="overlay-title">Parcel Ghost</h2>
-          <p id="overlay-text">You are a courier who only EXISTS while holding still. Move and you become a ghost — cameras and guards forget you, but you cannot touch parcels. Stand still ~0.12s to solidify, then pick up, drop, or deliver.</p>
+          <!-- Card copy is set by src/ui.js (COPY); this is the pre-script fallback. -->
+          <p id="overlay-text">You are a courier who only exists while standing still. Move and you turn ghost: guards can't see you, but you can't touch parcels either. Stop for a beat to turn solid, and you automatically pick up, drop, or deliver.</p>
           <ul class="legend" id="legend">
             <li><i class="swatch jade" aria-hidden="true"></i>Jade parcel → Jade dock</li>
             <li><i class="swatch ion" aria-hidden="true"></i>Ion parcel → Ion dock</li>
             <li><i class="swatch amber" aria-hidden="true"></i>Amber parcel → Amber dock</li>
           </ul>
-          <p class="fine" id="overlay-fine">Win: dock all 3 before the 90s shift ends. Fail: photo (solid inside a guard cone) or any parcel left in the open when time runs out. A held parcel counts as secure.</p>
+          <p class="fine" id="overlay-fine">Win: dock all 3 before the 90s shift ends. Lose: a guard photographs you solid inside its cone, or any parcel is undelivered when the shift ends (carrying one doesn't count).</p>
           <div id="summary" class="summary" hidden></div>
           <div class="overlay-actions">
             <button id="start-btn" class="btn-primary" type="button">Begin shift</button>
@@ -64,11 +65,18 @@
       <div id="stick" class="stick" aria-label="Touch stick">
         <div id="stick-knob" class="stick-knob"></div>
       </div>
-      <p class="hint">WASD / arrows move. Stand still to solidify (auto pick / deliver / drop). Esc or P pauses. Canvas drag also steers.</p>
+      <p class="hint">Move: WASD, arrows, stick, or drag the board. Stop to turn solid and interact. Esc / P pauses.</p>
     </div>
     <noscript><p class="hint">Parcel Ghost needs JavaScript. It runs fully offline once enabled.</p></noscript>
   </main>
-  <script src="audio.js"></script>
-  <script src="game.js"></script>
+  <!-- Classic scripts (not ES modules) so the game runs from file:// as well as GitHub Pages. Order matters. -->
+  <script src="src/audio.js"></script>
+  <script src="src/config.js"></script>
+  <script src="src/geometry.js"></script>
+  <script src="src/sim.js"></script>
+  <script src="src/ui.js"></script>
+  <script src="src/render.js"></script>
+  <script src="src/input.js"></script>
+  <script src="src/main.js"></script>
 </body>
 </html>
