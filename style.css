@@ -18,6 +18,8 @@
 }
 
 * { box-sizing: border-box; }
+/* Component display rules (.pill, .summary, .legend…) must not override the hidden attribute. */
+[hidden] { display: none !important; }
 html, body {
   margin: 0;
   height: 100%;
@@ -207,17 +209,17 @@ h1 {
 .overlay {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
+  display: flex;
   padding: 16px;
   background: rgba(4, 6, 12, 0.72);
   backdrop-filter: blur(6px);
   z-index: 5;
+  overflow-y: auto;
 }
 
-.overlay[hidden] { display: none !important; }
-
 .card {
+  /* margin:auto centers the card but, unlike place-items, lets a tall card scroll instead of clipping. */
+  margin: auto;
   width: min(340px, 100%);
   background: linear-gradient(165deg, #141b2e 0%, #0b1020 100%);
   border: 1px solid #24304a;

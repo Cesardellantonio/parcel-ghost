@@ -1,0 +1,9 @@
+{
+  "name": "parcel-ghost",
+  "private": true,
+  "description": "Static single-page game. No dependencies or build; these scripts are dev checks only.",
+  "scripts": {
+    "check": "for f in src/*.js tests/*.js; do node --check \"$f\" || exit 1; done",
+    "test": "node --test tests/*.test.js"
+  }
+}
